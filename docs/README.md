@@ -1,9 +1,17 @@
-# BEW 1.2 Custom API Project Proposal
+# SoccerU
 
-> API that servers JSON data for soccer teams.
+> An authenticated and responsive Node.js REST API that serves real data for soccer teams.
+
+## Overview
 
 
-## Routes
+## Examples
+
+
+## Authentification
+
+## Endpoints
+
 All HTTP methods are supported.
 
 |       Verb          |      Endpoint        |       Description              |
