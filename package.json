@@ -1,0 +1,27 @@
+{
+  "name": "socceru",
+  "version": "1.0.0",
+  "description": "An authenticated and responsive Node.js REST API that serves real data for soccer teams",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MediBoss/SoccerU.git"
+  },
+  "keywords": [
+    "Rest",
+    "API",
+    "Node"
+  ],
+  "author": "Medi W. Assumani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MediBoss/SoccerU/issues"
+  },
+  "homepage": "https://github.com/MediBoss/SoccerU#readme"
+}
