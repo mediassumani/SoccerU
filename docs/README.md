@@ -14,7 +14,11 @@
 
 All HTTP methods are supported.
 
-|       Verb          |      Endpoint        |       Description              |
-| -------------       |:--------------------:| ------------------------------:|
-| GET                 | /teams               | Get all the teams available    |
-| GET                 | /teams/:teamID       | Get data about a specific team |
+|       Verb          |      Endpoint        |       Description                           |
+| -------------       |:--------------------:| -------------------------------------------:|
+| GET                 | /teams                         |Get all the teams available       |
+| GET                 | /teams/:teamID                 |Get data about a specific team    |
+| GET                 | /teams/:teamID/players         |Get all players of a specific team |
+| GET                 | /teams/:teamID/players/:playerID|Get data about a specific player |
+| POST                 | /teams/:teamID/comments        |Post comments about a team |
+| GET                 | /teams/:teamID/players/:playerID|Get data about a specific player |
