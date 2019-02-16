@@ -8,7 +8,7 @@ const TeamSchema = new Schema({
   coach: {type: String},
   stadium: {type: String},
   loaction: {type: String}
-
+  // TODO: Add league attribute
   // TODO: Add a player array property
   // TODO: Add more fields
 })

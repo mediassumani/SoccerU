@@ -10,14 +10,18 @@ const express = require("express")
       http = require("http")
       app = express()
       port = process.env.DEV_PORT || 3000
+      leagues = require("./controllers/api/v1/leagues")
       teams = require("./controllers/api/v1/teams")
+      players = require("./controllers/api/v1/players")
 
 
 // SET MIDDLEWARE
 app.use(bodyParser.json())
 app.use(expressValidator())
 app.use(cookieParser())
+app.use(leagues)
 app.use(teams)
+app.use(players)
 
 // SERVER BOOT UP
 app.listen(port)
