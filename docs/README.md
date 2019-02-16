@@ -13,10 +13,12 @@ SoccerU is an authenticated and free online REST API that serves real data for s
 SoccerU follows a RESTFull Architecture.
 
 |       Verb          |      Endpoint        |      Description                           |
-| -------------       |:--------------------:| -------------------------------------------:|
-| GET                 | /teams                         |Get all the teams available       |
-| GET                 | /teams/:teamID                 |Get data about a specific team    |
-| GET                 | /teams/:teamID/players         |Get all players of a specific team |
-| GET                 | /teams/:teamID/players/:playerID|Get data about a specific player |
-| GET                 | /teams/:teamID/players/:playerID/comments|Get comments about a specific player |
-| POST                 | /teams/:teamID/comments        |Post comments about a team |
+| -------------       |:--------------------:| ------------------------------------------:|
+| GET                 | /leagues                       |Get all available leagues         |
+| GET                 | /leagues/:leagueID             |Get data for a specific league    |
+| GET                 | /leagues/:leagueID/teams       |Get all the teams available       |
+| GET                 | /leagues/:leagueID/teams/:teamID|Get data for a specific team    |
+| GET                 | /leagues/:leagueID/teams/:teamID/players|Get all a team's roster |
+| GET                 | /leagues/:leagueID/teams/:teamID/players/:playerID|Get data for a specific player |
+| GET                 | /leagues/:leagueID/teams/:teamID/players/:playerID/comments|Get comments for a specific player |
+| POST                | /leagues/:leagueID/teams/:teamID/comments|Post comments about a team |
