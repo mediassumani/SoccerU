@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const LeagueSchema = new Schema({
 
-  name: {type: String, required: true},
+  name: {type: String},
   numberOfTeams: {type: Number},
   location: {type: String},
   // TODO: Add a team array property
