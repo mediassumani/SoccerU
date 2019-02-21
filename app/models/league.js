@@ -7,8 +7,7 @@ const LeagueSchema = new Schema({
   name: {type: String},
   numberOfTeams: {type: Number},
   location: {type: String},
-  // TODO: Add a team array property
-  // TODO: Add more fields
+  teams: [ {type: Schema.Types.ObjectId, ref: "Team"}]
 })
 
 module.exports = mongoose.model("League", LeagueSchema)

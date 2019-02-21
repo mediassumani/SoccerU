@@ -4,7 +4,7 @@ const express = require("express")
 
 // ENDPOINT TO ALL LEAGUES AVAILABLE
 router.get("/api/v1/leagues", function(req, res){
-  League.find()
+  League.find({})
     .then( (leagues) => {
       res.send(leagues)
     })
