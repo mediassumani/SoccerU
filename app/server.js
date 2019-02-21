@@ -10,15 +10,20 @@ const express = require("express")
       http = require("http")
       app = express()
       port = process.env.DEV_PORT || 3000
+      auth = require("./controllers/api/v1/auth")
       leagues = require("./controllers/api/v1/leagues")
       teams = require("./controllers/api/v1/teams")
       players = require("./controllers/api/v1/players")
+
+
+mongoose.connect("mongodb://localhost/SoccerU", {userNewParser: true})
 
 
 // SET MIDDLEWARE
 app.use(bodyParser.json())
 app.use(expressValidator())
 app.use(cookieParser())
+app.use(auth)
 app.use(leagues)
 app.use(teams)
 app.use(players)
