@@ -7,6 +7,8 @@ router.get("/api/v1/leagues", function(req, res){
   League.find({})
     .then( (leagues) => {
       res.send(leagues)
+    }).catch( error => {
+      res.status(400).send({ error: error })
     })
 })
 
@@ -15,6 +17,8 @@ router.get("/api/v1/leagues/:leagueID", function(req, res){
   League.find({ _id: req.params.leagueID })
     .then( (league) => {
       res.send(league)
+    }).catch( error => {
+      res.status(400).send({ error: error })
     })
 })
 
