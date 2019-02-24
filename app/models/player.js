@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const PlayerSchema = new Schema({
 
   name: {type: String},
-  age: {type: Int},
+  age: {type: Number},
   nationality: {type: String},
   team: { type: Schema.Types.ObjectId, ref: "Team"}
 

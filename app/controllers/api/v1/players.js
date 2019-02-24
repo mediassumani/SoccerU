@@ -5,7 +5,7 @@ const express = require("express")
 
 // ENDPOINT TO GET TEAM ROSTER
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res){
-  Team.findByid(req.params.teamID)
+  Team.findById(req.params.teamID)
     .then( team => {
       res.send(team.players)
     }).catch( error => {
@@ -15,7 +15,7 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res)
 
 // ENPOINT TO GET A SPECIFIC PLAYER
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/players/:playerID", function(req, res){
-  Player.findByid(req.params.playerID)
+  Player.findById(req.params.playerID)
     .then( player => {
       res.send(player)
     }).catch( error => {
