@@ -10,7 +10,7 @@ SoccerU is an authenticated and free online REST API that serves real data for s
 
 ### Endpoints
 
-SoccerU follows a RESTFull Architecture.
+SoccerU follows a RESTFull Architecture. Below are the available endpoints.
 
 |       Verb          |      Endpoint        |      Description                           |
 | -------------       |:--------------------:| ------------------------------------------:|
