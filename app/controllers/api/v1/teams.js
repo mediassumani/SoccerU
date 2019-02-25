@@ -7,7 +7,8 @@ const express = require("express")
 router.get("/api/v1/leagues/:leagueID/teams", function(req, res){
   League.find( {_id: req.params.leagueID} )
     .then( (league) => {
-      res.send(league.teams)
+      const teams = league.teams
+      res.send(teams)
     }). catch( (error) => {
       res.status(400).send({ error: error })
     })

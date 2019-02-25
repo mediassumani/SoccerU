@@ -14,7 +14,7 @@ router.get("/api/v1/leagues", function(req, res){
 
 // ENPOINT TO GET A SPECIFIC LEAGUE
 router.get("/api/v1/leagues/:leagueID", function(req, res){
-  League.find({ _id: req.params.leagueID })
+  League.findById(req.params.leagueID)
     .then( (league) => {
       res.send(league)
     }).catch( error => {
