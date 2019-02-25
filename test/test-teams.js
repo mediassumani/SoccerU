@@ -41,13 +41,15 @@ describe('Teams', () => {
   // TEST ROUTE : GET ALL LEAGUES
   it('should return all the teams from the DB on /api/v1/leagues/:leagueID/teams GET', (done) => {
     let league = new League(dummyLeague)
-    chai.request(server)
-      .get(`/api/v1/leagues/${league._id}/teams`)
-      .end( (err, res) => {
-        res.should.have.status(200)
-        res.body.should.be.a('object')
-        done()
-      })
+    league.save(( err, savedLeague) => {
+      chai.request(server)
+        .get(`/api/v1/leagues/${savedLeague._id}/teams`)
+        .end( (err, res) => {
+          res.should.have.status(200)
+          res.body.should.be.a('array')
+          done()
+        })
+    })
   })
 
   // TEST ROUTE : GET A SINGLE LEAGUE
