@@ -6,6 +6,10 @@
 
 SoccerU is an authenticated REST Api that servers real data for soccer leagues, teams, and players.
 
+## How 
+
+Right now SoccerU is serving data from my own knowldge. However, I am aproaching a stage to scrap teams, leagues, and players data from an online website since there is no public external api. I will start with 1 league, 1 team, and 1 player then grow from there.
+
 ## Why?
 
 * I am creating SoccerU because...
