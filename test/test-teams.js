@@ -5,8 +5,10 @@ const should = chai.should()
 const assert = chai.assert
 const Team = require("../app/models/team")
 const League = require("../app/models/league")
-
-
+let league
+let team
+let leagueID
+let teamID
 chai.use(chaiHttp)
 
 // SET UP
@@ -27,6 +29,18 @@ const dummyLeague = {
 }
 
 describe('Teams', () => {
+
+  before( () => {
+    league = new League(dummyLeague)
+    team = new Team(dummyTeam)
+    league.save( (err, savedLeague) => {
+      leagueID = savedLeague._id
+    })
+
+    team.save( (err, savedTeam) => {
+      teamID = savedTeam._id
+    })
+  })
 
   // Delete data from Database after testing
   after(() => {
@@ -54,22 +68,18 @@ describe('Teams', () => {
 
   // TEST ROUTE : GET A SINGLE LEAGUE
   it('should return one team from the DB on /api/v1/leagues/:leagueID/teams/:teamID GET', (done) => {
-    let league = new League(dummyLeague)
-    let team = new Team(dummyTeam)
-    league.save( (error, savedLeague) => {
-      team.save( (error, savedTeam) => {
-        chai.request(server)
-          .get(`/api/v1/leagues/${savedLeague._id}/teams/${savedTeam._id}`)
-          .end( (err, res) => {
+    chai.request(server)
+      .get(`/api/v1/leagues/${leagueID}/teams/${teamID}`)
+      .end( (err, res) => {
 
-            // Test Assertions and Assumptions
-            res.should.have.status(200)
-            // res.body.should.have.property('name')
-            // assert.typeOf(res.body.numberOfTeams, 'Number')
-            // assert.typeOf(res.body.name, 'string')
-            done()
-          })
+        // Test Assertions and Assumptions
+        res.should.have.status(200)
+        res.body.should.have.property('name')
+        res.body.should.have.property('coach')
+        res.body.should.have.property('location')
+        assert.typeOf(res.body.stadium, 'string')
+        assert.typeOf(res.body.name, 'string')
+        done()
       })
-    })
   })
 })
