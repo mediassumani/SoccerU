@@ -7,7 +7,7 @@ const PlayerSchema = new Schema({
   name: {type: String},
   age: {type: Number},
   nationality: {type: String},
-  team: { type: Schema.Types.ObjectId, ref: "Team"}
+  //team: { type: Schema.Types.ObjectId, ref: "Team"}
 
   // TODO: Add more fields
 })

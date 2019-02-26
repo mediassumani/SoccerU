@@ -52,7 +52,7 @@ describe('Teams', () => {
     })
   })
 
-  // TEST ROUTE : GET ALL LEAGUES
+  // TEST ROUTE : GET ALL TEAMS
   it('should return all the teams from the DB on /api/v1/leagues/:leagueID/teams GET', (done) => {
     let league = new League(dummyLeague)
     league.save(( err, savedLeague) => {
@@ -66,7 +66,7 @@ describe('Teams', () => {
     })
   })
 
-  // TEST ROUTE : GET A SINGLE LEAGUE
+  // TEST ROUTE : GET A SINGLE TEAM
   it('should return one team from the DB on /api/v1/leagues/:leagueID/teams/:teamID GET', (done) => {
     chai.request(server)
       .get(`/api/v1/leagues/${leagueID}/teams/${teamID}`)
