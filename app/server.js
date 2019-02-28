@@ -15,6 +15,7 @@ const express = require("express")
       leagues = require("./controllers/api/v1/leagues")
       teams = require("./controllers/api/v1/teams")
       players = require("./controllers/api/v1/players")
+      
 
 // SET MIDDLEWARE
 app.use(bodyParser.json())
