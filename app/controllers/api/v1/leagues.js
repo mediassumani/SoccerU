@@ -6,9 +6,9 @@ const express = require("express")
 router.get("/api/v1/leagues", function(req, res){
   League.find({})
     .then( (leagues) => {
-      res.send(leagues)
+      res.json(leagues)
     }).catch( error => {
-      res.status(400).send({ error: error })
+      res.status(400).json({ error: error })
     })
 })
 
@@ -16,9 +16,9 @@ router.get("/api/v1/leagues", function(req, res){
 router.get("/api/v1/leagues/:leagueID", function(req, res){
   League.findById(req.params.leagueID)
     .then( (league) => {
-      res.send(league)
+      res.json(league)
     }).catch( error => {
-      res.status(400).send({ error: error })
+      res.status(400).json({ error: error })
     })
 })
 
