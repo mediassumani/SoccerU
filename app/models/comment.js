@@ -1,10 +1,26 @@
+//------------------/
+// The Comment Model  /
+//------------------/
+
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema()
 
+// Define the properties of a single comment object
 const CommentSchema = new Schema({
     title: { type: String},
     body: { type: String},
-    author: { type: Schema.Type.ObjectId, ref: "User"}
+    author: { type: Schema.Type.ObjectId, ref: "User"},
+    createdAt: { type: Date},
+    updatedAt: { type: Date}
+})
+
+CommentSchema.pre("save", (next) => {
+    // Set the time and date the comment is created and updated
+    const now = new Date()
+    this.updatedAt = now
+    if(!this.createdAt){
+        this.createdAt = noew
+    }
 })
 
 module.exports = mongoose.model("Comment", CommentSchema)
