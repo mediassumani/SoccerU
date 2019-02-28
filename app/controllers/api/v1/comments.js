@@ -5,19 +5,23 @@ const Team = require("../../../models/team")
 
 
 // ENDPOINT TO CREATE A COMMENT
-router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/", function(req, res){
+router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/new", function(req, res){
    
-    const comment = new Comment(req.params.body)
+    const comment = new Comment(req.body)
     comment.author = null
-    comment.save().then( (comment) =>{
-        // TODO : Push new comments on team's array
-        return res.status(200).json(comment)
+    comment.save()
+        .then( (savedComment) =>{
+            // TODO : Push new comments on team's array
+            console.log(savedComment);
+            return res.status(200).json(savedComment)
+    }).catch( (error) => {
+        return res.status(400).send(error)
     })
 })
 
 // ENDPOINT TO GET ALL COMMENTS OF A TEAM
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments", function(req, res){
-    Team.findByID(req.params.teamID)
+    Team.findById(req.params.teamID)
         .populate('comments')
         .then( (team) => {
             const comments = team.comments
@@ -31,9 +35,9 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments", function(req, res
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", function(req, res){
     Comment.findById(req.params.commentID)
         .then( (comment) => {
-            res.status(200).json(comment)
+            return res.status(200).json(comment)
         }).catch( (error) => {
-            res.status(400).send(error)
+            return res.status(400).send(error)
         })
 })
 
@@ -43,9 +47,9 @@ router.put("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", functi
     const comment = req.body
     Comment.findByIdAndUpdate(req.params.commentID, comment)
         .then( (updatedComment) => {
-            res.status(200).json(updatedComment)
+            return res.status(200).json(updatedComment)
         }).catch( (error) => {
-            res.status(400).send(error)
+            return res.status(400).send(error)
         })
 })
 
@@ -54,9 +58,9 @@ router.delete("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", fun
     
     Comment.findByIdAndDelete(req.params.commentID)
         .then( (deletedComment) => {
-            res.status(200).send({ message: "Comment deleted" })
+            return res.status(200).send({ message: "Comment deleted" })
         }).catch( (error) => {
-            res.status(400).send(error)
+            return res.status(400).send(error)
         })
 })
 

@@ -15,6 +15,7 @@ const express = require("express")
       leagues = require("./controllers/api/v1/leagues")
       teams = require("./controllers/api/v1/teams")
       players = require("./controllers/api/v1/players")
+      comments = require("./controllers/api/v1/comments")
       
 
 // SET MIDDLEWARE
@@ -25,6 +26,7 @@ app.use(auth)
 app.use(leagues)
 app.use(teams)
 app.use(players)
+app.use(comments)
 
 // SERVER BOOT UP
 app.listen(port)

@@ -3,13 +3,13 @@
 //------------------/
 
 const mongoose = require("mongoose")
-const Schema = mongoose.Schema()
+const Schema = mongoose.Schema
 
 // Define the properties of a single comment object
 const CommentSchema = new Schema({
     title: { type: String},
     body: { type: String},
-    author: { type: Schema.Type.ObjectId, ref: "User"},
+    author: { type: Schema.Types.ObjectId, ref: "Comment"},
     createdAt: { type: Date},
     updatedAt: { type: Date}
 })
@@ -21,6 +21,7 @@ CommentSchema.pre("save", (next) => {
     if(!this.createdAt){
         this.createdAt = noew
     }
+    next()
 })
 
 module.exports = mongoose.model("Comment", CommentSchema)
