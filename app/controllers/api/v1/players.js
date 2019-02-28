@@ -5,9 +5,12 @@ const express = require("express")
 
 // ENDPOINT TO GET TEAM ROSTER
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res){
-  Player.find()
-    .then( players => {
-      res.send(players)
+  Team.findById(req.params.teamID)
+    .populate("players")
+    .then( team => {
+
+      const players = team.players
+      res.status(200).json(players)
     }).catch( error => {
       res.status(400).send({ error: error })
     })
@@ -17,7 +20,7 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res)
 router.get("/api/v1/leagues/:leagueID/teams/:teamID/players/:playerID", function(req, res){
   Player.findById(req.params.playerID)
     .then( player => {
-      res.send(player)
+      res.status(200).json(player)
     }).catch( error => {
       res.status(400).send({ error: error })
     })
