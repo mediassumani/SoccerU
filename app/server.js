@@ -1,5 +1,6 @@
 // EXPORT NEEDED MODULES AND ROUTES
 
+require("./database/soccerU-db")
 require('dotenv').config()
 const express = require("express")
       mongoose = require("mongoose")
@@ -14,10 +15,6 @@ const express = require("express")
       leagues = require("./controllers/api/v1/leagues")
       teams = require("./controllers/api/v1/teams")
       players = require("./controllers/api/v1/players")
-
-
-mongoose.connect("mongodb://localhost/SoccerU", {userNewParser: true})
-
 
 // SET MIDDLEWARE
 app.use(bodyParser.json())

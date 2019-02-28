@@ -5,11 +5,15 @@ const express = require("express")
 
 // ENDPOINT TO GET ALL TEAMS
 router.get("/api/v1/leagues/:leagueID/teams", function(req, res){
-  Team.find()
-    .then( (teams) => {
-      res.send(teams)
+  League.findById(req.params.leagueID)
+    .populate("teams")
+    .then( (league) => {
+      
+      const teams = league.teams
+      console.log(teams);
+      res.json(teams)
     }).catch( (error) => {
-      res.status(400).send({ error: error })
+      res.status(400).send(error)
     })
 })
 
