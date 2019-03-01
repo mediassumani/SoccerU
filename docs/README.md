@@ -1,4 +1,4 @@
-<img src= "assets/soccerULogo.png" width = 150 height = 150></img>
+<img src= "../assets/soccerULogo.png" width = 150 height = 150></img>
 # SoccerU
 
 ### Overview
