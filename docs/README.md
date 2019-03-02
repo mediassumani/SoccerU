@@ -13,7 +13,7 @@ SoccerU is an authenticated and free online REST API that serves real data for s
 
 SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the available endpoints.
 
-### Base URL : https://socceru-api.herokuapp.com/
+### Base URL : https://socceru-api.herokuapp.com/api/v1
 
 |       Verb          |      Endpoint        |      Description                           |
 | -------------       |:--------------------:| ------------------------------------------:|
