@@ -10,6 +10,7 @@ const CommentSchema = new Schema({
     title: { type: String},
     body: { type: String},
     author: { type: Schema.Types.ObjectId, ref: "Comment"},
+    team: { type: Schema.Types.ObjectId, ref: "Team"},
     createdAt: { type: Date},
     updatedAt: { type: Date}
 })

@@ -9,19 +9,19 @@ router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/new", function(req
    
     const comment = new Comment(req.body)
     comment.author = null
-    comment.save().then( (savedComment) =>{
-        Team.findById(req.params.teamID)
-            .then( (team) => {
-
-                // Adds the created comment to the targeted team
+    Team.findById(req.params.teamID)
+        .then( (team) => {
+            comment.team = team._id
+            comment.save().then( (savedComment) =>{
                 team.comments.unshift(savedComment)
-                return res.status(200).json(savedComment)
+                team.save()
+                res.status(200).json(savedComment)
             }).catch( (error) => {
-                res.json({error: "Unable to find the team wit that id"})
+                return res.status(400).send(error)
             })
-    }).catch( (error) => {
-        return res.status(400).send(error)
-    })
+        }).catch( (error) => {
+            return res.status(400).send(error)
+        })
 })
 
 // ENDPOINT TO GET ALL COMMENTS OF A TEAM

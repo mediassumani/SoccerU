@@ -11,7 +11,6 @@ const TeamSchema = new Schema({
   league: { type: Schema.Types.ObjectId, ref: "League"},
   players: [{ type: Schema.Types.ObjectId, ref: "Player" }],
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment"}]
-
 })
 
 module.exports = mongoose.model("Team", TeamSchema)
