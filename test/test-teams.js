@@ -8,7 +8,6 @@ const League = require("../app/models/league")
 let league
 let team
 let leagueID
-let teamID
 chai.use(chaiHttp)
 
 // SET UP
@@ -17,7 +16,6 @@ const dummyTeam = {
   name: "Barcelona",
   stadium: "Camp Nou",
   location: "Spain",
-  league: "La Liga Santander",
   coach: "Some Guy"
 }
 
@@ -31,19 +29,7 @@ const dummyLeague = {
 describe('Teams', () => {
 
   before( () => {
-    league = new League(dummyLeague)
-    team = new Team(dummyTeam)
-    league.save( (err, savedLeague) => {
-      //leagueID = savedLeague._id
-
-      team.save( (err, savedTeam) => {
-        //teamID = savedTeam._id
-      }).catch( (err) => {
-        console.log(err);
-      })
-    }).catch( (err) => {
-      console.log(err);
-    })
+    // Any set up before starting test
   })
 
   // Delete data from Database after testing
@@ -56,34 +42,45 @@ describe('Teams', () => {
     })
   })
 
-  // TEST ROUTE : GET ALL TEAMS
-  // it('should return all the teams from the DB on /api/v1/leagues/:leagueID/teams GET', (done) => {
-  //   let league = new League(dummyLeague)
-  //   league.save(( err, savedLeague) => {
-  //     chai.request(server)
-  //       .get(`/api/v1/leagues/${savedLeague._id}/teams`)
-  //       .end( (err, res) => {
-  //         res.should.have.status(200)
-  //         res.body.should.be.a('array')
-  //         done()
-  //       })
-  //   })
-  // })
+  // TEST ROUTE : GET ALL TEAMS FROM A LEAGUE
+  it('should return all the teams from the DB on /api/v1/leagues/:leagueID/teams GET', (done) => {
+    let league = new League(dummyLeague)
+    league.save(( err, savedLeague) => {
+      chai.request(server)
+        .get(`/api/v1/leagues/${savedLeague._id}/teams`)
+        .end( (err, res) => {
+          res.should.have.status(200)
+          res.body.should.be.a('array')
+          done()
+        })
+    })
+  })
 
   // TEST ROUTE : GET A SINGLE TEAM
-  // it('should return one team from the DB on /api/v1/leagues/:leagueID/teams/:teamID GET', (done) => {
-  //   chai.request(server)
-  //     .get(`/api/v1/leagues/${leagueID}/teams/${teamID}`)
-  //     .end( (err, res) => {
+  it('should return one team from the DB on /api/v1/leagues/:leagueID/teams/:teamID GET', (done) => {
 
-  //       // Test Assertions and Assumptions
-  //       res.should.have.status(200)
-  //       res.body.should.have.property('name')
-  //       res.body.should.have.property('coach')
-  //       res.body.should.have.property('location')
-  //       assert.typeOf(res.body.stadium, 'string')
-  //       assert.typeOf(res.body.name, 'string')
-  //       done()
-  //     })
-  // })
+    let league = new League(dummyLeague)
+    //let team = new Team(dummyTeam)
+    let leagueID
+
+    league.save( (err, savedLeague) => {
+      leagueID = savedLeague._id
+      const team = new Team(dummyTeam)
+      team.save( (err, savedTeam) => {
+        chai.request(server)
+        .get(`/api/v1/leagues/${leagueID}/teams/${savedTeam._id}`)
+        .end( (err, res) => {
+  
+          // Test Assertions and Assumptions
+          res.should.have.status(200)
+          res.body.should.have.property('name')
+          res.body.should.have.property('coach')
+          res.body.should.have.property('location')
+          assert.typeOf(res.body.stadium, 'string')
+          assert.typeOf(res.body.name, 'string')
+          done()
+        })
+      })
+    })
+  })
 })

@@ -19,7 +19,7 @@ router.get("/api/v1/leagues/:leagueID/teams", function(req, res){
 // ENPOINT TO GET ONE SPECIFIC TEAM
 router.get("/api/v1/leagues/:leagueID/teams/:teamID", function(req, res){
   Team.findById(req.params.teamID)
-    .then( (team) => {
+    .then( (team) => {    
       res.status(200).json(team)
     }).catch( (error) => {
       res.status(400).send(error)
