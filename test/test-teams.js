@@ -5,9 +5,8 @@ const should = chai.should()
 const assert = chai.assert
 const Team = require("../app/models/team")
 const League = require("../app/models/league")
-let league
-let team
-let leagueID
+
+
 chai.use(chaiHttp)
 
 // SET UP
@@ -59,16 +58,14 @@ describe('Teams', () => {
   // TEST ROUTE : GET A SINGLE TEAM
   it('should return one team from the DB on /api/v1/leagues/:leagueID/teams/:teamID GET', (done) => {
 
-    let league = new League(dummyLeague)
-    //let team = new Team(dummyTeam)
-    let leagueID
+    const league = new League(dummyLeague)
 
     league.save( (err, savedLeague) => {
-      leagueID = savedLeague._id
+
       const team = new Team(dummyTeam)
       team.save( (err, savedTeam) => {
         chai.request(server)
-        .get(`/api/v1/leagues/${leagueID}/teams/${savedTeam._id}`)
+        .get(`/api/v1/leagues/${savedLeague._id}/teams/${savedTeam._id}`)
         .end( (err, res) => {
   
           // Test Assertions and Assumptions
