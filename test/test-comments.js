@@ -104,8 +104,8 @@ describe('Comments', () => {
       })
     })
 
-    // // TEST ROUTE : SHOW
-    it('should display  created /reviews/:id GET', (done) => {
+    // // TEST ROUTE : SHOW ONE COMMENT
+    it('should display the created comment on /api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID GET', (done) => {
       
       const league = new League(dummyLeague)
       league.save( (err, savedLeague) => {
@@ -128,46 +128,47 @@ describe('Comments', () => {
       })
     })
 
-    // // TEST ROUTE : EDIT
-    // it('should give the user the ability to edit a review /reviews/:id GET', (done) => {
-    //   let review = new Review(sampleReview);
-    //   review.save( (err, data) => {
-    //     chai.request(server)
-    //       .get(`/reviews/${data._id}/edit`)
-    //       .end( (err, res) => {
-    //         res.should.have.status(200);
-    //         res.should.be.html;
-    //         done();
-    //       })
-    //   })
-    // })
+    // TEST ROUTE : UPDATE ONE COMMENT
+    it('should give the user the ability to edit a review /reviews/:id GET', (done) => {
+      
+      const league = new League(dummyLeague)
+      league.save( (err, savedLeague) => {
+        const team = new Team(dummyTeam)
+        team.save( (err, savedTeam) => {
+          const comment = new Comment(dummyComment)
+          comment.save( (err, savedComment) => {
+            chai.request(server)
+            .put(`/api/v1/leagues/${savedLeague._id}/teams/${savedTeam._id}/comments/${savedComment._id}`)
+            .end( (err, res) => {
+              res.should.have.status(200)
+              res.body.should.have.property('title')
+              res.body.should.have.property('body')
+              assert.typeOf(res.body.title, 'string')
+              assert.typeOf(res.body.body, 'string')
+              done()
+            })
+          })
+        })
+      })
+    })
 
-    // // TEST ROUTE : UPDATE
-    // it('should update the edited review /reviews/:id PUT', (done) => {
-    //   let review = new Review(sampleReview);
-    //   review.save( (err, data) => {
-    //     chai.request(server)
-    //       .put(`/reviews/${data._id}?_method=PUT`)
-    //       .send({'title': 'updating title'})
-    //       .end( (err, res) => {
-    //         res.should.have.status(200);
-    //         res.should.be.html;
-    //         done();
-    //       });
-    //   });
-    // });
-
-    // // TEST ROUTE : DELETE
-    // it('should delete the selected review /reviews/:id DELETE', (done) => {
-    //   let review = new Review(sampleReview);
-    //   review.save( (err, data) => {
-    //     chai.request(server)
-    //       .delete(`/reviews/${data._id}?_method=DELETE`)
-    //       .end( (err, res) => {
-    //         res.should.have.status(200);
-    //         res.should.be.html;
-    //         done();
-    //       });
-    //   });
-    // });
-});
+    // TEST ROUTE : DELETE ONE COMMENT
+    it('should delete the selected comment on ("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID DELETE', (done) => {
+        
+      const league = new League(dummyLeague)
+      league.save( (err, savedLeague) => {
+        const team = new Team(dummyTeam)
+        team.save( (err, savedTeam) => {
+          const comment = new Comment(dummyComment)
+          comment.save( (err, savedComment) => {
+            chai.request(server)
+            .delete(`/api/v1/leagues/${savedLeague._id}/teams/${savedTeam._id}/comments/${savedComment._id}`)
+            .end( (err, res) => {
+              res.should.have.status(200)
+              done()
+            })
+          })
+        })
+      })
+    })
+})
