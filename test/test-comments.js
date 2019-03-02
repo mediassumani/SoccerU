@@ -4,34 +4,61 @@ const server = require('../app/server');
 const should = chai.should();
 const assert = chai.assert
 const Comment = require('../app/models/comment');
-
+const Team = require("../app/models/team")
+const League = require("../app/models/league")
+let league
+let team
+let leagueID
+let teamID
 
 chai.use(chaiHttp);
 
 // SAMPLE data to test EDIT, UPDATE, DELETE ROUTES
-let sampleComment = {
+const sampleComment = {
   "title": "The teammates",
   "body": "the teamstes are cherish kim she sucks because she mean as hell"
 };
+const dummyTeam = {
+    players: [],
+    name: "Barcelona",
+    stadium: "Camp Nou",
+    location: "Spain",
+    league: "La Liga Santander",
+    coach: "Some Guy"
+  }
+  
+  const dummyLeague = {
+    teams: [],
+    name: "EPL",
+    numberOfTeams: 20,
+    location: "England, UK"
+  }
+  
 
 describe('Comments', () => {
 
+    // before( () => {
+    //     league = new League(dummyLeague)
+    //     team = new Team(dummyTeam)
+    // })
+
+
     // MAKING SURE THE SAMPLE COMMENT OBJECT CREATED IS DELETED FROM THE DATABASE
-  after(() => {
-    Comment.deleteMany({title: 'The teammates'}).exec( (err, comments) => {
-      comments.remove()
-    })
-  });
+    after(() => {
+        Comment.deleteMany({title: 'The teammates'}).exec( (err, comments) => {
+        //comments.remove()
+        })
+    });
 
   // TEST ROUTE : INDEX
-  it('should index ALL comments on /api/v1/leagues/:leagueID/teams/:teamdID/comments GET', (done) => {
-    chai.request(server)
-      .get('/api/v1/leagues/:leagueID/teams/:teamID/comments')
-      .end( (err, res) => {
-        res.should.have.status(200)
-        done();
-      });
-  });
+//   it('should index ALL comments on /api/v1/leagues/:leagueID/teams/:teamdID/comments GET', (done) => {
+//     chai.request(server)
+//       .get('/api/v1/leagues/:leagueID/teams/:teamID/comments')
+//       .end( (err, res) => {
+//         res.should.have.status(200)
+//         done();
+//       });
+//   });
 
     // // TEST ROUTE : NEW
     // it('should display new form on /reviews/new GET', (done) => {
