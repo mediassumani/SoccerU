@@ -19,7 +19,7 @@ CommentSchema.pre("save", (next) => {
     const now = new Date()
     this.updatedAt = now
     if(!this.createdAt){
-        this.createdAt = noew
+        this.createdAt = now
     }
     next()
 })
