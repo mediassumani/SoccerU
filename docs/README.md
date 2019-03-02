@@ -23,3 +23,8 @@ SoccerU follows a RESTFull Architecture. Below are the available endpoints.
 | GET                 | /leagues/:leagueID/teams/:teamID|Get data for a specific team    |
 | GET                 | /leagues/:leagueID/teams/:teamID/players|Get all a team's roster |
 | GET                 | /leagues/:leagueID/teams/:teamID/players/:playerID|Get data for a specific player |
+| GET                 | /leagues/:leagueID/teams/:teamID/comments|Get all comments for a specific team |
+| GET                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Get  a specific comment |
+| POST                | /leagues/:leagueID/teams/:teamID/comments/new|Create a new comment for a specific team |
+| PUT                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Update a comment for a specific team|
+| DELETE              | /leagues/:leagueID/teams/:teamID/comments/:commentID|Remove a comment from a specific team |
