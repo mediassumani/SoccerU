@@ -129,7 +129,7 @@ describe('Comments', () => {
     })
 
     // TEST ROUTE : UPDATE ONE COMMENT
-    it('should give the user the ability to edit a review /reviews/:id GET', (done) => {
+    it('should update a comment /reviews/:id GET', (done) => {
       
       const league = new League(dummyLeague)
       league.save( (err, savedLeague) => {
