@@ -4,10 +4,34 @@
 ### Overview
 SoccerU is an authenticated and free online REST API that serves real data for soccer teams. It is great for programmers who are learning how to consume data from a REST API. It is built with Node.js, Express.js, and MongoDB.
 
-### Examples
-
 
 ### Authentification
+SoccerU only allows authenticated and authorized users to make requests.
+* Create an account here
+* Get the created token
+* When making a request pass the token in the header
+
+#### Examples 
+
+##### JQuery
+``` javascript
+    $.ajax({
+   url : myurl,
+   headers: {
+        'X-Auth-Token' : token
+   });
+```
+
+##### Swift
+``` swift
+    var request = URLRequest(url: url)
+    request.setValue("Token \(YOUR_TOKEN)", forHTTPHeaderField: "Authorization")
+```
+
+##### Rails
+``` ruby
+    request.set_header("Token", "YOUR_TOKEN")
+```
 
 ### Endpoints
 
