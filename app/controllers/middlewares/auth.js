@@ -3,7 +3,15 @@ const express = require("express")
 const router = express.Router()
 const User = require("../../models/user")
 
+
+// ENDPOINT TO TO RENDER THE SIGN UP FORM
+router.get("/sign-up", function(req, res){
+  res.render("sign-up")
+})
+
+// ENDPOINT TO SIGN IN THE USER
 router.post("/sign-up", function(request, response){
+  console.log(request.body);
   
   const user = new User(request.body)
   user.save()
@@ -12,15 +20,21 @@ router.post("/sign-up", function(request, response){
         expiresIn: "60 days"
       });
       response.cookie("SUToken", token, {maxAge: 900000})
-      response.status(200).json(savedUser)
+      response.status(200).render("dashboard")
     }).catch( (error) => {
       return response.status(400).send({ error: error})
     })
 })
 
+
+// ENDPOINT TO TO RENDER THE SIGN IN FORM
+router.get("/sign-in", function(req,res){
+  res.render("sign-in")
+})
+
 // ENDPOINT TO SIGN IN THE USER
 router.post('/sign-in', (req, res) => {
-
+  
   const userEmail = req.body.email;
   const userPassword = req.body.password;
 
@@ -31,7 +45,7 @@ router.post('/sign-in', (req, res) => {
       }
 
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '60 days' })
-      res.status(200).cookie('SUToken', token, { maxAge: 900000 }).json(user)
+      return res.status(200).cookie('SUToken', token, { maxAge: 900000 }).render("dashboard")
     }).catch((error) => {
       return res.send(401).send(error)
     });

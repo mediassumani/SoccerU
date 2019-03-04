@@ -8,9 +8,10 @@ const checkAuth = (request, response, next) => {
         request.user = null;
         console.log('user not authenticated');
     }else{
-        const token = request.cookies.scToken;
+        const token = request.cookies.SUToken;
         const decodedToken = jwt.decode(token, { complete: true }) || {};
         request.user = decodedToken.payload;
+        
         console.log('user fully authenticated');
     }
     next();
