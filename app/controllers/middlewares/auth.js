@@ -16,11 +16,11 @@ router.post("/sign-up", function(request, response){
   const user = new User(request.body)
   user.save()
     .then( (savedUser) => {
-      const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ _id: savedUser._id, email: savedUser.email, username: savedUser.username }, process.env.JWT_SECRET, {
         expiresIn: "60 days"
       });
       response.cookie("SUToken", token, {maxAge: 900000})
-      response.status(200).render("dashboard")
+      response.status(200).redirect("/dashboard")
     }).catch( (error) => {
       return response.status(400).send({ error: error})
     })
@@ -41,11 +41,19 @@ router.post('/sign-in', (req, res) => {
   User.findOne({ email: userEmail })
     .then((user) => {
       if (!user) {
-        res.status(401).send({ message: 'email or password is incorect' })
+        res.status(401).send({ message: 'email or password is incorect' }).redirect("/sign-in")
       }
 
-      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '60 days' })
-      return res.status(200).cookie('SUToken', token, { maxAge: 900000 }).render("dashboard")
+      user.comparePassword(password, (err, isMatch) => {
+        if(!isMatch) {
+          res.status(401).send({ message: 'email or password is incorect' }).redirect("/sign-in")
+        } else {
+
+          // create token and redirect to dahsboard page
+          const token = jwt.sign({ _id: user._id, email: savedUser.email, username: savedUser.username }, process.env.JWT_SECRET, { expiresIn: '60 days' })
+          return res.status(200).cookie('SUToken', token, { maxAge: 900000 }).redirect("/dashboard")
+        }
+      })
     }).catch((error) => {
       return res.send(401).send(error)
     });
@@ -54,8 +62,9 @@ router.post('/sign-in', (req, res) => {
 
 // ENDPOINT TO SIGN OUT THE USER
 router.delete('/sign-out', (req, res) => {
+  // clear all our token and redirect to API documentation page
   res.clearCookie('SUToken');
-  // TODO : REDIRECT THE USER SOMEWHERE
+  res.status(200).redirect("/https://mediboss.github.io/SoccerU/#/")
 });
 
 
