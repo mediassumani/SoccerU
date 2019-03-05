@@ -9,9 +9,8 @@ router.get("/sign-up", function(req, res){
   res.render("sign-up")
 })
 
-// ENDPOINT TO SIGN IN THE USER
+// ENDPOINT TO SIGN UP THE USER
 router.post("/sign-up", function(request, response){
-  console.log(request.body);
   
   const user = new User(request.body)
   user.save()
@@ -19,10 +18,11 @@ router.post("/sign-up", function(request, response){
       const token = jwt.sign({ _id: savedUser._id, email: savedUser.email, username: savedUser.username }, process.env.JWT_SECRET, {
         expiresIn: "60 days"
       });
+
       response.cookie("SUToken", token, {maxAge: 900000})
-      response.status(200).redirect("/dashboard")
+      response.status(200).redirect(`/dashboard/${user.username}`)
     }).catch( (error) => {
-      return response.status(400).send({ error: error})
+      response.status(400).send({ error: error})
     })
 })
 
@@ -46,13 +46,20 @@ router.post('/sign-in', (req, res) => {
 
       user.comparePassword(password, (err, isMatch) => {
         if(!isMatch) {
+          console.log('is no match');
+          
           res.status(401).send({ message: 'email or password is incorect' }).redirect("/sign-in")
         } else {
-
+          console.log("is match baby");
+          
           // create token and redirect to dahsboard page
           const token = jwt.sign({ _id: user._id, email: savedUser.email, username: savedUser.username }, process.env.JWT_SECRET, { expiresIn: '60 days' })
-          return res.status(200).cookie('SUToken', token, { maxAge: 900000 }).redirect("/dashboard")
+
+          res.cookie('SUToken', token, { maxAge: 900000 })
+          response.status(200).redirect(`/dashboard/${user.email}`)
         }
+      }).catch( (err) => {
+        res.send(err)
       })
     }).catch((error) => {
       return res.send(401).send(error)

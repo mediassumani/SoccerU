@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs")
 const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
 const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
@@ -8,17 +9,22 @@ const UserSchema = new Schema({
   email: { type: String, unique: true, required: true },
   username: { type: String, required: true},
   password: { type: String, required: true },
+  apiKey: { type: String}
 })
 
 UserSchema.pre("save", function(next){
+
+  // SET THE DATE THE ACCOUNT WAS CREATED
   var now = new Date()
   this.updatedAt = now
   if (!this.createdAt){
     this.createdAt = now
   }
 
-  // ENCRYPT PASSWORD
+  // GENERATE A NEW API KEY FOR THE USER 
+  this.apiKey = jwt.sign({}, process.env.CRYPTO_SECRET, { expiresIn: "60 days" })
 
+  // ENCRYPT PASSWORD
   var user = this
   if(!user.isModified("password")){
     return next()

@@ -19,6 +19,7 @@ const express = require("express")
       teams = require("./controllers/api/v1/teams")
       players = require("./controllers/api/v1/players")
       comments = require("./controllers/api/v1/comments")
+      dashboard = require("./controllers/middlewares/dashboard")
       
 
 // SET MIDDLEWARE
@@ -31,6 +32,7 @@ app.use(expressValidator())
 app.use(cookieParser())
 app.use(checkAuth)
 app.use(auth)
+app.use(dashboard)
 app.use(leagues)
 app.use(teams)
 app.use(players)
