@@ -114,6 +114,6 @@ This project is licenced under the Apache 2.0 License - see the <a href="https:/
 ## Acknowledgments
 
 * Hat tip to anyone who's code was used
-* My Backend instructor
+* My Backend instructor - <a href="https://github.com/droxey">Dani </a>
 * Inspiration
 * Stack overflow
