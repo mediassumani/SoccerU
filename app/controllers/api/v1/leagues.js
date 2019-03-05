@@ -17,7 +17,7 @@ router.get("/api/v1/leagues", function(req, res){
       res.status(400).json({ error: error })
     })
   } else {
-    res.status(401).send("Aunthenticated")
+    res.status(401).json({ err: "Invalid Token"})
   }
 })
 
