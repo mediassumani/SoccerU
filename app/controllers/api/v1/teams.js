@@ -2,10 +2,15 @@ const express = require("express")
       router = express.Router()
       League = require("../../../models/league")
       Team = require("../../../models/team")
+      helper = require("../../../helpers/validator")
 
 // ENDPOINT TO GET ALL TEAMS
 router.get("/api/v1/leagues/:leagueID/teams", function(req, res){
-  League.findById(req.params.leagueID)
+
+  const key = req.apiKey
+  if(helper.isValideAPIKey(key)){
+
+    League.findById(req.params.leagueID)
     .populate("teams")
     .then( (league) => {
       
@@ -14,16 +19,26 @@ router.get("/api/v1/leagues/:leagueID/teams", function(req, res){
     }).catch( (error) => {
       res.status(400).send(error)
     })
+  } else {
+    res.status(401).send("Aunthenticated")
+  }
 })
 
 // ENPOINT TO GET ONE SPECIFIC TEAM
 router.get("/api/v1/leagues/:leagueID/teams/:teamID", function(req, res){
-  Team.findById(req.params.teamID)
+
+  const key = req.apiKey
+  if(helper.isValideAPIKey(key)){
+    
+    Team.findById(req.params.teamID)
     .then( (team) => {    
       res.status(200).json(team)
     }).catch( (error) => {
       res.status(400).send(error)
     })
+  } else {
+    res.status(401).send("Aunthenticated")
+  }
 })
 
 
