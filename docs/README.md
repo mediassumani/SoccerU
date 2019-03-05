@@ -109,7 +109,7 @@ SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the av
 
 ## License
 
-This project is licenced under the Apache 2.0 License - see the <a href="https://github.com/MediBoss/Lofti/blob/master/LICENSE">LICENSE</a> file for details
+This project is licenced under the Apache 2.0 License - see the <a href="https://github.com/MediBoss/SoccerU/blob/master/LICENSE">LICENSE</a> file for details
 
 ## Acknowledgments
 
