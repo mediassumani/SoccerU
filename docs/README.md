@@ -105,3 +105,15 @@ SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the av
 * [Handlebars](https://handlebarsjs.com/)
 * [JWT](https://jwt.io/introduction/)
 * [Mocha](https://mochajs.org/)
+
+
+## License
+
+This project is licenced under the Apache 2.0 License - see the <a href="https://github.com/MediBoss/Lofti/blob/master/LICENSE">LICENSE</a> file for details
+
+## Acknowledgments
+
+* Hat tip to anyone who's code was used
+* My Backend instructor
+* Inspiration
+* Stack overflow
