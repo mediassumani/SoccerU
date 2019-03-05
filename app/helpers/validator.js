@@ -3,6 +3,9 @@ const User = require("../models/user")
 // TODO : Update funtion to handle promise
 exports.isValideAPIKey = function(key){
 
+    if(!key){
+        return false
+    }
     if(key.length === 128){
         console.log("valid shit");
         return true
