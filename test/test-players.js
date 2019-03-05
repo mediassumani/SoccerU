@@ -1,11 +1,11 @@
 const chai = require("chai")
 const chaiHttp = require("chai-http")
-const server = require("../app/server")
+const server = require("../server")
 const should = chai.should()
 const assert = chai.assert
-const Team = require("../app/models/team")
-const League = require("../app/models/league")
-const Player = require("../app/models/player")
+const Team = require("../models/team")
+const League = require("../models/league")
+const Player = require("../models/player")
 
 chai.use(chaiHttp)
 
