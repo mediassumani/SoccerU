@@ -13,21 +13,11 @@ const checkAuth = (request, response, next) => {
     }
 
     if(!request.headers.authorization){
-        request.validation = false
+        request.apiKey = null
     } else {
 
-        request.validation = true
-        const apiKey = request.headers.authorization
-        User.findOne( { apiKey: apiKey} )
-            .then( (user) => {
-                if(user){
-                    request.validation = true
-                } else {
-                    request.validation = false
-                }
-            }).catch( error => {
-                response.status(400).json({ error: error })
-              })
+        const bearer = request.headers.authorization
+        request.apiKey = bearer
     }
     next();
 };

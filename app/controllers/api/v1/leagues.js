@@ -2,22 +2,23 @@ const express = require("express")
       router = express.Router()
       League = require("../../../models/league")
       User = require("../../../models/user")
+      helper = require("../../../helpers/validator")
 
 // ENDPOINT TO ALL LEAGUES AVAILABLE
 router.get("/api/v1/leagues", function(req, res){
 
-  //const isValidRequest = req.validation
-  //console.log("Is Request Valid : " + isValidRequest);
-  console.log(req.validation);
+  const key = req.apiKey
   
-  
-  res.status(200)
-  // League.find({})
-  //   .then( (leagues) => {
-  //     res.json(leagues)
-  //   }).catch( error => {
-  //     res.status(400).json({ error: error })
-  //   })
+  if(helper.isValideAPIKey(key)){
+      League.find({})
+        .then( (leagues) => {
+        res.json(leagues)
+      }).catch( error => {
+      res.status(400).json({ error: error })
+    })
+  } else {
+    res.status(401).send("Aunthenticated")
+  }
 })
 
 
