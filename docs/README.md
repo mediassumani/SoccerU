@@ -94,7 +94,7 @@ SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the av
 
 ### Engineer(s)
 
-* <a href="https://github.com/MediBoss">Medi Assumani</a> - Full Stack Engineer
+* <a href="https://github.com/MediBoss">Medi Assumani</a> - Backend Engineer
 
 ### Project Built With
 
