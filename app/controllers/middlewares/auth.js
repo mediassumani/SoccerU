@@ -6,7 +6,7 @@ const User = require("../../models/user")
 
 // ENDPOINT TO TO RENDER THE SIGN UP FORM
 router.get("/sign-up", function(req, res){
-  res.render("sign-up")
+  res.status(200).render("sign-up")
 })
 
 // ENDPOINT TO SIGN UP THE USER
@@ -29,7 +29,7 @@ router.post("/sign-up", function(request, response){
 
 // ENDPOINT TO TO RENDER THE SIGN IN FORM
 router.get("/sign-in", function(req,res){
-  res.render("sign-in")
+  res.status(200).render("sign-in")
 })
 
 // ENDPOINT TO SIGN IN THE USER
