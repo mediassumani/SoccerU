@@ -37,7 +37,6 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "express-validator": "^5.3.1",
-    "heroku-self-ping": "^2.0.0",
     "jsonwebtoken": "^8.4.0",
     "method-override": "^3.0.0",
     "mocha": "^6.0.1",
