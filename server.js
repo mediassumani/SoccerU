@@ -2,6 +2,7 @@
 
 require('dotenv').config()
 require("./database/soccerU-db")
+require('heroku-self-ping')(process.env.APP_URL);
 const express = require("express")
       mongoose = require("mongoose")
       bodyParser = require("body-parser")
