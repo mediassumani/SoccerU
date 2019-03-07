@@ -58,6 +58,7 @@ SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the av
 
 #### Examples 
 
+NOTE : Only 1 league, 2 teams, and 2 players are available at the momment.
 ```
    GET /leagues/:leagueID/teams Get data for a specific team
 
