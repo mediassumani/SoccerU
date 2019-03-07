@@ -9,7 +9,30 @@ SoccerU is an authenticated and free online REST API that serves real data for s
 SoccerU only allows authenticated and authorized users to make requests.
 * <a href="https://socceru-api.herokuapp.com/sign-up">Create an account</a>
 * Get the your UNIQUE generated token
-* When making a request pass the token in the header. Look at some examples below...
+* When making a request pass the token in the header.
+
+
+### Endpoints
+
+SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the available endpoints.
+
+### Base URL : https://socceru-api.herokuapp.com/api/v1
+
+|       Verb          |      Endpoint        |      Description                           |
+| -------------       |:--------------------:| ------------------------------------------:|
+| GET                 | /leagues                       |Get all available leagues         |
+| GET                 | /leagues/:leagueID             |Get data for a specific league    |
+| GET                 | /leagues/:leagueID/teams       |Get all the teams available       |
+| GET                 | /leagues/:leagueID/teams/:teamID|Get data for a specific team    |
+| GET                 | /leagues/:leagueID/teams/:teamID/players|Get all a team's roster |
+| GET                 | /leagues/:leagueID/teams/:teamID/players/:playerID|Get data for a specific player |
+| GET                 | /leagues/:leagueID/teams/:teamID/comments|Get all comments for a specific team |
+| GET                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Get  a specific comment |
+| POST                | /leagues/:leagueID/teams/:teamID/comments/new|Create a new comment for a specific team |
+| PUT                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Update a comment for a specific team|
+| DELETE              | /leagues/:leagueID/teams/:teamID/comments/:commentID|Remove a comment from a specific team |
+
+#### Examples 
 
 ##### JQuery
 ``` javascript
@@ -35,28 +58,6 @@ SoccerU only allows authenticated and authorized users to make requests.
 ``` go
    req.Header.Set("Authorization", YOUR_AUTH_TOKEN)
 ```
-
-### Endpoints
-
-SoccerU follows RESTFull and Resourcefull routing Architecture. Below are the available endpoints.
-
-### Base URL : https://socceru-api.herokuapp.com/api/v1
-
-|       Verb          |      Endpoint        |      Description                           |
-| -------------       |:--------------------:| ------------------------------------------:|
-| GET                 | /leagues                       |Get all available leagues         |
-| GET                 | /leagues/:leagueID             |Get data for a specific league    |
-| GET                 | /leagues/:leagueID/teams       |Get all the teams available       |
-| GET                 | /leagues/:leagueID/teams/:teamID|Get data for a specific team    |
-| GET                 | /leagues/:leagueID/teams/:teamID/players|Get all a team's roster |
-| GET                 | /leagues/:leagueID/teams/:teamID/players/:playerID|Get data for a specific player |
-| GET                 | /leagues/:leagueID/teams/:teamID/comments|Get all comments for a specific team |
-| GET                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Get  a specific comment |
-| POST                | /leagues/:leagueID/teams/:teamID/comments/new|Create a new comment for a specific team |
-| PUT                 | /leagues/:leagueID/teams/:teamID/comments/:commentID|Update a comment for a specific team|
-| DELETE              | /leagues/:leagueID/teams/:teamID/comments/:commentID|Remove a comment from a specific team |
-
-#### Examples 
 
 NOTE : Only 1 league, 2 teams, and 2 players are available at the momment.
 ```
