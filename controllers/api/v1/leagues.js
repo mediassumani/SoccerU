@@ -1,11 +1,12 @@
 const express = require("express")
+      cors = require("cors")
       router = express.Router()
       League = require("../../../models/league")
       User = require("../../../models/user")
       helper = require("../../../helpers/validator")
 
 // ENDPOINT TO ALL LEAGUES AVAILABLE
-router.get("/api/v1/leagues", function(req, res){
+router.get("/api/v1/leagues", cors(), function(req, res){
 
   const key = req.apiKey
   if(helper.isValideAPIKey(key)){
@@ -23,7 +24,7 @@ router.get("/api/v1/leagues", function(req, res){
 
 
 // ENPOINT TO GET A SPECIFIC LEAGUE
-router.get("/api/v1/leagues/:leagueID", function(req, res){
+router.get("/api/v1/leagues/:leagueID", cors(), function(req, res){
 
   const key = req.apiKey
   if(helper.isValideAPIKey(key)){

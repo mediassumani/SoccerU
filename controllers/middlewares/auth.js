@@ -24,8 +24,6 @@ router.post("/sign-up", function(request, response){
       response.cookie("SUToken", token, {maxAge: 900000})
       response.status(200).redirect(`/dashboard/${user.username}`)
     }).catch( (error) => {
-      console.log(error);
-      
       response.status(400).json({ "error" : error})
     })
 })
@@ -36,46 +34,46 @@ router.get("/sign-in", function(req,res){
   res.status(200).render("sign-in")
 })
 
-// ENDPOINT TO SIGN IN THE USER
+// ENDPOINT TO SING IN THE USER
 router.post('/sign-in', (req, res) => {
-  
+
   const userEmail = req.body.email;
   const userPassword = req.body.password;
 
   User.findOne({ email: userEmail })
     .then((user) => {
+      // send an authorized code if wrong credentials provided
       if (!user) {
-        res.status(401).send({ message: 'email or password is incorect' }).redirect("/sign-in")
+        res.sendStatus(401)
+      } else {
+        // send an authorized code if password does not match
+        user.comparePassword(userPassword, (err, isMatch) => {
+          if (!isMatch) {
+            console.log("no match");
+            
+            return res.sendStatus(401)
+          } else {
+
+            // create token and send it as cookie          
+            const token = jwt.sign({ _id: user._id, email: user.email, username: user.username }, process.env.JWT_SECRET, { expiresIn: '60 days' })
+            res.cookie('SUToken', token, { maxAge: 900000 })
+            res.status(200).redirect(`/dashboard/${user.username}`)
+          }
+        })
       }
-
-      user.comparePassword(password, (err, isMatch) => {
-        if(!isMatch) {
-          console.log('is no match');
-          
-          res.status(401).send({ message: 'email or password is incorect' }).redirect("/sign-in")
-        } else {
-          console.log("is match baby");
-          
-          // create token and redirect to dahsboard page
-          const token = jwt.sign({ _id: user._id, email: savedUser.email, username: savedUser.username }, process.env.JWT_SECRET, { expiresIn: '60 days' })
-
-          res.cookie('SUToken', token, { maxAge: 900000 })
-          response.status(200).redirect(`/dashboard/${user.email}`)
-        }
-      }).catch( (err) => {
-        res.send(err)
-      })
     }).catch((error) => {
-      return res.send(401).send(error)
+      console.log(error);
+      
+      return res.sendStatus(401)
     });
 });
 
 
 // ENDPOINT TO SIGN OUT THE USER
-router.delete('/sign-out', (req, res) => {
+router.get('/sign-out', (req, res) => {
   // clear all our token and redirect to API documentation page
   res.clearCookie('SUToken');
-  res.status(200).redirect("/https://mediboss.github.io/SoccerU/#/")
+  res.status(200).redirect("/sign-up")
 });
 
 

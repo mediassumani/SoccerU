@@ -1,11 +1,12 @@
 const express= require("express")
+cors = require("cors")
 const router  = express.Router()
 const Comment = require("../../../models/comment")
 const Team = require("../../../models/team")
 
 
 // ENDPOINT TO CREATE A COMMENT
-router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/new", function(req, res){
+router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/new", cors(),  function(req, res){
    
     const key = req.apiKey
     if(helper.isValideAPIKey(key)){
@@ -31,7 +32,7 @@ router.post("/api/v1/leagues/:leagueID/teams/:teamID/comments/new", function(req
 })
 
 // ENDPOINT TO GET ALL COMMENTS OF A TEAM
-router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments", function(req, res){
+router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments", cors(), function(req, res){
 
     const key = req.apiKey
     if(helper.isValideAPIKey(key)){
@@ -50,7 +51,7 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments", function(req, res
 })
 
 // ENDPOINT TO GET A SINGLE COMMENT OF A TEAM
-router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", function(req, res){
+router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", cors(), function(req, res){
 
     const key = req.apiKey
     if(helper.isValideAPIKey(key)){
@@ -67,7 +68,7 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", functi
 })
 
 //ENDPOINT TO UPDATE A COMMENT
-router.put("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", function(req, res){
+router.put("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", cors(), function(req, res){
 
     const key = req.apiKey
     if(helper.isValideAPIKey(key)){
@@ -85,7 +86,7 @@ router.put("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", functi
 })
 
 //ENDPOINT TO DELETE A COMMENT
-router.delete("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", function(req, res){
+router.delete("/api/v1/leagues/:leagueID/teams/:teamID/comments/:commentID", cors(), function(req, res){
     
     const key = req.apiKey
     if(helper.isValideAPIKey(key)){

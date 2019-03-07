@@ -1,10 +1,11 @@
 const express = require("express")
+      cors = require("cors")
       router = express.Router()
       Team = require("../../../models/team")
       Player = require("../../../models/player")
 
 // ENDPOINT TO GET TEAM ROSTER
-router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res){
+router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", cors(), function(req, res){
 
   const key = req.apiKey
   if(helper.isValideAPIKey(key)){
@@ -24,7 +25,7 @@ router.get("/api/v1/leagues/:leagueID/teams/:teamID/players", function(req, res)
 })
 
 // ENPOINT TO GET A SPECIFIC PLAYER
-router.get("/api/v1/leagues/:leagueID/teams/:teamID/players/:playerID", function(req, res){
+router.get("/api/v1/leagues/:leagueID/teams/:teamID/players/:playerID", cors(), function(req, res){
 
   const key = req.apiKey
   if(helper.isValideAPIKey(key)){
