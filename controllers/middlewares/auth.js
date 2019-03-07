@@ -19,9 +19,13 @@ router.post("/sign-up", function(request, response){
         expiresIn: "60 days"
       });
 
+      console.log(savedUser);
+      
       response.cookie("SUToken", token, {maxAge: 900000})
       response.status(200).redirect(`/dashboard/${user.username}`)
     }).catch( (error) => {
+      console.log(error);
+      
       response.status(400).json({ "error" : error})
     })
 })
