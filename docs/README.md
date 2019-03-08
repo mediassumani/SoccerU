@@ -2,7 +2,7 @@
 # SoccerU
 
 ### Overview
-SoccerU is an authenticated and free online REST API that serves real data for soccer teams. It is great for programmers who are learning how to consume data from a REST API. It is built with Node.js, Express.js, and MongoDB.
+SoccerU is an authenticated and free online HTTP REST API that serves real data for soccer teams. It is great for programmers who are learning how to consume data from a REST API. It is built with Node.js, Express.js, and MongoDB.
 
 
 ### Authentification
