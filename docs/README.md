@@ -8,7 +8,7 @@ SoccerU is an authenticated and free online HTTP REST API that serves real data 
 ### Authentification
 SoccerU only allows authenticated and authorized users to make requests.
 * <a href="https://socceru-api.herokuapp.com/sign-up">Create an account</a>
-* Get the your UNIQUE generated token
+* Get your UNIQUE generated token
 * When making a request pass the token in the header.
 
 
